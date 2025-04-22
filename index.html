@@ -1,18 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jezy Can Do | Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="stars"></div>
   <div class="overlay"></div>
-  <div class="central-node">Jezy Can Do</div>
 
-  <div class="floating-project proj1" onclick="window.location.href='project1.html'">LinkedIn Scraper</div>
-  <div class="floating-project proj2">Coming Soon</div>
-  <div class="floating-project proj3">Coming Soon</div>
-  <div class="floating-project proj4">Coming Soon</div>
+  <div class="central-node" id="center">Jezy Can Do</div>
+
+  <div class="floating-project proj1" id="proj1" onclick="window.location.href='project1.html'">LinkedIn Scraper</div>
+  <div class="floating-project proj2" id="proj2">Coming Soon</div>
+  <div class="floating-project proj3" id="proj3">Coming Soon</div>
+  <div class="floating-project proj4" id="proj4">Coming Soon</div>
+
+  <svg class="connector">
+    <line id="line1" x1="0" y1="0" x2="0" y2="0" />
+    <line id="line2" x1="0" y1="0" x2="0" y2="0" />
+    <line id="line3" x1="0" y1="0" x2="0" y2="0" />
+    <line id="line4" x1="0" y1="0" x2="0" y2="0" />
+  </svg>
+
+  <script>
+    function connectElements(lineId, startEl, endEl) {
+      const line = document.getElementById(lineId);
+      const start = document.getElementById(startEl).getBoundingClientRect();
+      const end = document.getElementById(endEl).getBoundingClientRect();
+      const svg = document.querySelector(".connector").getBoundingClientRect();
+
+      line.setAttribute("x1", start.left + start.width / 2 - svg.left);
+      line.setAttribute("y1", start.top + start.height / 2 - svg.top);
+      line.setAttribute("x2", end.left + end.width / 2 - svg.left);
+      line.setAttribute("y2", end.top + end.height / 2 - svg.top);
+    }
+
+    function drawConnections() {
+      connectElements("line1", "center", "proj1");
+      connectElements("line2", "center", "proj2");
+      connectElements("line3", "center", "proj3");
+      connectElements("line4", "center", "proj4");
+    }
+
+    window.addEventListener("load", drawConnections);
+    window.addEventListener("resize", drawConnections);
+    setInterval(drawConnections, 1000);
+  </script>
 </body>
 </html>

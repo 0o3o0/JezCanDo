@@ -17,21 +17,21 @@ body {
 }
 
 .stars {
-  background: url('https://upload.wikimedia.org/wikipedia/commons/9/95/Starsinthesky.jpg') repeat;
+  background: url('https://images.unsplash.com/photo-1581291519195-ef11498d1cf5?auto=format&fit=crop&w=1650&q=80') no-repeat center center fixed;
   background-size: cover;
   position: fixed;
   top: 0;
   left: 0;
-  width: 300%;
-  height: 300%;
-  animation: starfield 120s linear infinite;
+  width: 100%;
+  height: 100%;
   z-index: 0;
-  opacity: 0.5;
+  opacity: 0.4;
+  animation: fadeGalaxy 30s ease-in-out infinite alternate;
 }
 
-@keyframes starfield {
-  from { transform: translate(0, 0); }
-  to { transform: translate(-50%, -50%); }
+@keyframes fadeGalaxy {
+  from { opacity: 0.4; }
+  to { opacity: 0.6; }
 }
 
 .overlay {

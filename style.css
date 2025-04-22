@@ -5,16 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jezy Can Do | Portfolio</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      overflow: hidden;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+
+    .central-node {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(6px);
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .floating-project {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 500;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+      z-index: 2;
+      animation: float 6s ease-in-out infinite;
+      cursor: pointer;
+    }
+
+    .floating-project:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .proj1 { top: 20%; left: 15%; animation-delay: 0s; }
+    .proj2 { top: 30%; right: 20%; animation-delay: 1s; }
+    .proj3 { bottom: 25%; left: 10%; animation-delay: 2s; }
+    .proj4 { bottom: 30%; right: 15%; animation-delay: 3s; }
+  </style>
 </head>
 <body>
   <div class="overlay"></div>
-  <div class="lang-toggle">
-    <a href="index.html">EN</a>
-  </div>
-  <div class="content">
-    <h1>Hi, I'm Jezy</h1>
-    <p>I can learn anything. I’ve worked directly with clients, so I know how to connect technology with people. Please explore the projects I’ve built for fun—and don’t hesitate to ask questions!</p>
-    <button class="button" onclick="window.location.href='project1.html'">View My Projects</button>
-  </div>
+  <div class="central-node">Jezy Can Do</div>
+  <div class="floating-project proj1" onclick="window.location.href='project1.html'">LinkedIn Scraper</div>
+  <div class="floating-project proj2">Coming Soon</div>
+  <div class="floating-project proj3">Coming Soon</div>
+  <div class="floating-project proj4">Coming Soon</div>
 </body>
 </html>

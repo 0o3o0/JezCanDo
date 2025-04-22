@@ -25,6 +25,10 @@ canvas#stars {
   z-index: 0;
   display: block;
   background: black;
+  background-image: url('https://images.unsplash.com/photo-1473923377535-0002805f43f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.4;
 }
 
 section {

@@ -23,11 +23,11 @@ section {
   align-items: center;
   text-align: center;
   position: relative;
+  flex-direction: column;
 }
 
 .intro {
   background: rgba(0, 0, 0, 0.4);
-  flex-direction: column;
   z-index: 3;
 }
 
@@ -46,7 +46,6 @@ section {
 }
 
 .cta {
-  flex-direction: column;
   background: rgba(0, 0, 0, 0.5);
   z-index: 3;
 }
@@ -74,7 +73,7 @@ section {
 }
 
 .stars {
-  background: url('https://images.unsplash.com/photo-1581291519195-ef11498d1cf5?auto=format&fit=crop&w=1650&q=80') no-repeat center center fixed;
+  background: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
   background-size: cover;
   position: fixed;
   top: 0;
@@ -82,7 +81,7 @@ section {
   width: 100%;
   height: 100%;
   z-index: 0;
-  opacity: 0.4;
+  opacity: 0.5;
   animation: fadeGalaxy 30s ease-in-out infinite alternate;
 }
 
@@ -157,9 +156,11 @@ svg.connector {
   left: 0;
   z-index: 2;
   pointer-events: none;
+  overflow: visible;
 }
 
 svg.connector path {
   stroke: rgba(255, 255, 255, 0.3);
   stroke-width: 1;
+  fill: none;
 }

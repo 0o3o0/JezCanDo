@@ -1,67 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jezy Can Do | Portfolio</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-    section {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 40px;
-      position: relative;
-      z-index: 3;
-      color: white;
-    }
-    .section-welcome h1 {
-      font-size: 2.5rem;
-    }
-    .section-welcome p {
-      font-size: 1.2rem;
-      margin-top: 20px;
-    }
-    .cta-button {
-      background-color: #00bcd4;
-      color: white;
-      padding: 12px 24px;
-      border: none;
-      font-size: 1.2rem;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .cta-button:hover {
-      background-color: #0097a7;
-    }
-    .phone-number {
-      margin-top: 20px;
-      font-size: 1.4rem;
-      font-weight: bold;
-      display: none;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="stars"></div>
   <div class="overlay"></div>
 
-  <!-- Section 1: Welcome -->
-  <section class="section-welcome">
+  <!-- Welcome Section -->
+  <section class="intro">
     <div>
-      <h1>Hey there 👋 Welcome to my galaxy</h1>
-      <p>Thanks for stopping by! Scroll down to explore my creations 🚀</p>
+      <h1>Welcome to My Portfolio</h1>
+      <p>Hi, and welcome to my corner of the galaxy. Thanks for stopping by!</p>
     </div>
   </section>
 
-  <!-- Section 2: Floating Projects -->
-  <section class="section-projects" style="position: relative;">
+  <!-- Projects Section -->
+  <section class="projects">
     <div class="central-node" id="center">Jezy Can Do</div>
 
     <div class="floating-project proj1" id="proj1" onclick="window.location.href='project1.html'">LinkedIn Scraper</div>
@@ -77,13 +35,12 @@
     </svg>
   </section>
 
-  <!-- Section 3: Call to Action -->
-  <section class="section-cta">
+  <!-- Call to Action Section -->
+  <section class="cta">
     <div>
-      <h2>Hope you enjoyed the trip 🌌</h2>
-      <p>If you're curious or impressed – reach out!</p>
-      <button class="cta-button" onclick="document.querySelector('.phone-number').style.display='block'">📞 Show My Phone</button>
-      <div class="phone-number">+972-54-1234567</div>
+      <h2>Hope you enjoyed the trip — ready to chat?</h2>
+      <button onclick="document.getElementById('phone').style.display='block'">📞 Show My Phone</button>
+      <div class="phone-number" id="phone">📱 +972-50-123-4567</div>
     </div>
   </section>
 
@@ -93,4 +50,32 @@
       const end = endEl.getBoundingClientRect();
       const svg = document.querySelector(".connector").getBoundingClientRect();
 
-      const x1 = start.left + start.width /
+      const x1 = start.left + start.width / 2 - svg.left;
+      const y1 = start.top + start.height / 2 - svg.top;
+      const x2 = end.left + end.width / 2 - svg.left;
+      const y2 = end.top + end.height / 2 - svg.top;
+
+      const dx = Math.abs(x2 - x1) * 0.4;
+      const dy = Math.abs(y2 - y1) * 0.4;
+
+      const cx1 = x1 + (x2 > x1 ? dx : -dx);
+      const cy1 = y1;
+      const cx2 = x2 - (x2 > x1 ? dx : -dx);
+      const cy2 = y2;
+
+      return `M${x1},${y1} C${cx1},${cy1} ${cx2},${cy2} ${x2},${y2}`;
+    }
+
+    function drawConnections() {
+      document.getElementById("path1").setAttribute("d", generatePath(document.getElementById("center"), document.getElementById("proj1")));
+      document.getElementById("path2").setAttribute("d", generatePath(document.getElementById("center"), document.getElementById("proj2")));
+      document.getElementById("path3").setAttribute("d", generatePath(document.getElementById("center"), document.getElementById("proj3")));
+      document.getElementById("path4").setAttribute("d", generatePath(document.getElementById("center"), document.getElementById("proj4")));
+    }
+
+    window.addEventListener("load", drawConnections);
+    window.addEventListener("resize", drawConnections);
+    setInterval(drawConnections, 1000);
+  </script>
+</body>
+</html>

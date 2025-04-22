@@ -8,45 +8,87 @@
 }
 
 body {
-  background-color: #fafafa;
-  color: #111;
+  background: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  height: 100vh;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+.project-box, .content {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
   padding: 40px;
+  max-width: 700px;
+  margin: 40px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  text-align: center;
 }
 
 h1 {
   font-size: 2.5rem;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
-p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  max-width: 600px;
+p, li {
+  font-size: 1.1rem;
   line-height: 1.6;
 }
 
-.project-card {
-  background: white;
-  padding: 24px;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-  transition: transform 0.3s ease;
-  cursor: pointer;
-  margin-top: 20px;
-  max-width: 600px;
+ul {
+  padding-left: 20px;
+  margin-bottom: 20px;
+  text-align: left;
 }
 
-.project-card:hover {
-  transform: translateY(-5px);
-}
-
-.project-card h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-}
-
-.project-card a {
+a {
+  color: #4fc3f7;
   text-decoration: none;
-  color: #007aff;
   font-weight: bold;
+}
+
+.button {
+  padding: 12px 24px;
+  background-color: #007aff;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #005fcc;
+}
+
+.lang-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 3;
+}
+
+.lang-toggle a {
+  color: white;
+  margin-left: 12px;
+  font-weight: bold;
+  text-decoration: none;
 }

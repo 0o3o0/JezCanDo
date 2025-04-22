@@ -1,52 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jezy Can Do | Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <canvas id="stars"></canvas>
-  <div class="overlay"></div>
-
-  <!-- Welcome Section -->
-  <section class="intro">
-    <div>
-      <h1>Welcome to My Portfolio</h1>
-      <p>Hi, and welcome to my corner of the galaxy. Thanks for stopping by!</p>
-    </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section class="projects">
-    <div class="central-node" id="center">Jezy Can Do</div>
-
-    <div class="floating-project proj1" id="proj1" onclick="window.location.href='project1.html'">LinkedIn Scraper</div>
-    <div class="floating-project proj2" id="proj2">Coming Soon</div>
-    <div class="floating-project proj3" id="proj3">Coming Soon</div>
-    <div class="floating-project proj4" id="proj4">Coming Soon</div>
-
-    <svg class="connector">
-      <path id="path1" />
-      <path id="path2" />
-      <path id="path3" />
-      <path id="path4" />
-    </svg>
-  </section>
-
-  <!-- Call to Action Section -->
-  <section class="cta">
-    <div>
-      <h2>Hope you enjoyed the trip — ready to chat?</h2>
-      <button onclick="document.getElementById('phone').style.display='block'">📞 Show My Phone</button>
-      <div class="phone-number" id="phone">📱 +972-50-123-4567</div>
-    </div>
-  </section>
-
-  <!-- Starfield JS -->
-  <script>
+<script>
+  window.onload = function () {
     const canvas = document.getElementById('stars');
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let stars = [];
 
@@ -88,38 +43,3 @@
 
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
-    animateStars();
-  </script>
-
-  <!-- Connection Lines Script -->
-  <script>
-    function generatePath(startEl, endEl) {
-      const start = startEl.getBoundingClientRect();
-      const end = endEl.getBoundingClientRect();
-      const svg = document.querySelector(".connector").getBoundingClientRect();
-
-      const x1 = start.left + start.width / 2 - svg.left;
-      const y1 = start.top + start.height / 2 - svg.top;
-      const x2 = end.left + end.width / 2 - svg.left;
-      const y2 = end.top + end.height / 2 - svg.top;
-
-      const dx = Math.abs(x2 - x1) * 0.4;
-      const cx1 = x1 + (x2 > x1 ? dx : -dx);
-      const cx2 = x2 - (x2 > x1 ? dx : -dx);
-
-      return `M${x1},${y1} C${cx1},${y1} ${cx2},${y2} ${x2},${y2}`;
-    }
-
-    function drawConnections() {
-      document.getElementById("path1").setAttribute("d", generatePath(document.getElementById("center"), document.getElementById("proj1")));
-      document.getElementById("path2").setAttribute("d", generatePath(document.getElementById("center"), document.getElementById("proj2")));
-      document.getElementById("path3").setAttribute("d", generatePath(document.getElementById("center"), document.getElementById("proj3")));
-      document.getElementById("path4").setAttribute("d", generatePath(document.getElementById("center"), document.getElementById("proj4")));
-    }
-
-    window.addEventListener("load", drawConnections);
-    window.addEventListener("resize", drawConnections);
-    setInterval(drawConnections, 1000);
-  </script>
-</body>
-</html>

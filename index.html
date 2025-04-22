@@ -56,14 +56,10 @@
       const y2 = end.top + end.height / 2 - svg.top;
 
       const dx = Math.abs(x2 - x1) * 0.4;
-      const dy = Math.abs(y2 - y1) * 0.4;
-
       const cx1 = x1 + (x2 > x1 ? dx : -dx);
-      const cy1 = y1;
       const cx2 = x2 - (x2 > x1 ? dx : -dx);
-      const cy2 = y2;
 
-      return `M${x1},${y1} C${cx1},${cy1} ${cx2},${cy2} ${x2},${y2}`;
+      return `M${x1},${y1} C${cx1},${y1} ${cx2},${y2} ${x2},${y2}`;
     }
 
     function drawConnections() {

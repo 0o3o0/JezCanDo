@@ -1,62 +1,142 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jezy Can Do | Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: black;
+      overflow: hidden;
+    }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
-}
+    .stars {
+      background: url('https://upload.wikimedia.org/wikipedia/commons/9/95/Starsinthesky.jpg') repeat;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      animation: moveStars 100s linear infinite;
+      z-index: 0;
+    }
 
-body {
-  background: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
-  background-size: cover;
-  color: white;
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-}
+    @keyframes moveStars {
+      from { transform: translate(0, 0); }
+      to { transform: translate(-50%, -50%); }
+    }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 1;
-}
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
 
-.central-node {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(6px);
-  padding: 16px 32px;
-  border-radius: 12px;
-  font-weight: bold;
-  font-size: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
+    .central-node {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(6px);
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      color: white;
+    }
 
-.floating-project {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  padding: 12px 20px;
-  border-radius: 10px;
-  font-weight: 500;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-  z-index: 2;
-  animation: float 6s ease-in-out infinite;
-  cursor: pointer;
-}
+    .floating-project {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 500;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+      z-index: 2;
+      animation: float 6s ease-in-out infinite;
+      cursor: pointer;
+      color: white;
+    }
 
-.floating-project:hover {
-  transform: scale(1.05);
-}
+    .floating-project:hover {
+      transform: scale(1.05);
+    }
 
-@keyframes float
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .proj1 { top: 20%; left: 15%; animation-delay: 0s; }
+    .proj2 { top: 30%; right: 20%; animation-delay: 1s; }
+    .proj3 { bottom: 25%; left: 10%; animation-delay: 2s; }
+    .proj4 { bottom: 30%; right: 15%; animation-delay: 3s; }
+
+    svg.connector {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="overlay"></div>
+  <div class="central-node" id="center">Jezy Can Do</div>
+
+  <div class="floating-project proj1" id="proj1" onclick="window.location.href='project1.html'">LinkedIn Scraper</div>
+  <div class="floating-project proj2" id="proj2">Coming Soon</div>
+  <div class="floating-project proj3" id="proj3">Coming Soon</div>
+  <div class="floating-project proj4" id="proj4">Coming Soon</div>
+
+  <svg class="connector">
+    <line id="line1" x1="0" y1="0" x2="0" y2="0" stroke="white" stroke-opacity="0.3" stroke-width="1" />
+    <line id="line2" x1="0" y1="0" x2="0" y2="0" stroke="white" stroke-opacity="0.3" stroke-width="1" />
+    <line id="line3" x1="0" y1="0" x2="0" y2="0" stroke="white" stroke-opacity="0.3" stroke-width="1" />
+    <line id="line4" x1="0" y1="0" x2="0" y2="0" stroke="white" stroke-opacity="0.3" stroke-width="1" />
+  </svg>
+
+  <script>
+    function connectElements(lineId, startEl, endEl) {
+      const line = document.getElementById(lineId);
+      const start = document.getElementById(startEl).getBoundingClientRect();
+      const end = document.getElementById(endEl).getBoundingClientRect();
+      const svg = document.querySelector(".connector").getBoundingClientRect();
+
+      line.setAttribute("x1", start.left + start.width / 2 - svg.left);
+      line.setAttribute("y1", start.top + start.height / 2 - svg.top);
+      line.setAttribute("x2", end.left + end.width / 2 - svg.left);
+      line.setAttribute("y2", end.top + end.height / 2 - svg.top);
+    }
+
+    function drawConnections() {
+      connectElements("line1", "center", "proj1");
+      connectElements("line2", "center", "proj2");
+      connectElements("line3", "center", "proj3");
+      connectElements("line4", "center", "proj4");
+    }
+
+    window.addEventListener("load", drawConnections);
+    window.addEventListener("resize", drawConnections);
+    setInterval(drawConnections, 1000);
+  </script>
+</body>
+</html>

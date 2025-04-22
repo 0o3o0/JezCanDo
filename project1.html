@@ -3,27 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>פרויקט 1 – סקרייפר לינקדאין</title>
+  <title>LinkedIn Scraper Project</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      height: 100vh;
+      overflow: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+
+    .project-box {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 700px;
+      margin: 40px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    p, li {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-bottom: 20px;
+    }
+
+    a {
+      color: #4fc3f7;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back-link {
+      margin-top: 30px;
+      display: inline-block;
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
-  <h1>🕵️‍♂️ סקרייפר לינקדאין אוטומטי</h1>
-  <p>זהו פרויקט אוטומציה שבניתי בעזרת Python ו-Selenium, שמבצע את כל הפעולות הבאות:</p>
-
-  <ul>
-    <li>מחפש פרופילים רלוונטיים בלינקדאין לפי מילות מפתח</li>
-    <li>שולח בקשות חברות אוטומטיות</li>
-    <li>בודק סטטוס חיבור מול כל אחד מהפרופילים</li>
-    <li>שומר את המידע על הפרופילים + סטטוס לקובץ Excel</li>
-  </ul>
-
-  <p>הפרויקט שימושי במיוחד למחפשי עבודה, אנשי שיווק או כל מי שרוצה לחסוך זמן באיסוף לידים בלינקדאין בצורה חכמה.</p>
-
-  <p>
-    📁 קוד פתוח לצפייה והורדה:
-    <a href="https://github.com/0o3o0/Jezcando" target="_blank">https://github.com/0o3o0/Jezcando</a>
-  </p>
-
-  <p class="back-link"><a href="index.html">← חזרה לעמוד הבית</a></p>
+  <div class="overlay"></div>
+  <div class="project-box">
+    <h1>🔎 LinkedIn Scraper Automation</h1>
+    <p>This project is a LinkedIn automation tool I built using Python and Selenium. It performs the following actions:</p>
+    <ul>
+      <li>Searches for relevant profiles on LinkedIn based on specific keywords</li>
+      <li>Sends automated connection requests</li>
+      <li>Tracks connection status for each profile</li>
+      <li>Exports the collected data + statuses into an Excel file</li>
+    </ul>
+    <p>This project is especially useful for job seekers, marketers, or anyone wanting to generate leads on LinkedIn in a smart, automated way.</p>
+    <p>
+      📁 View the code here:
+      <a href="https://github.com/0o3o0/Jezcando" target="_blank">https://github.com/0o3o0/Jezcando</a>
+    </p>
+    <a class="back-link" href="index.html">← Back to Home</a>
+  </div>
 </body>
 </html>

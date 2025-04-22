@@ -73,7 +73,7 @@ section {
 }
 
 .stars {
-  background: url('https://i.ibb.co/y5Wg3ph/starfield.gif') repeat;
+  background: url('https://cdn.pixabay.com/animation/2022/10/12/12/11/12-11-55-269_512.gif') repeat;
   background-size: cover;
   background-position: 0 0;
   animation: moveStars 120s linear infinite;

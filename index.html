@@ -3,17 +3,97 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jezy's Projects</title>
+  <title>Jezy Mirson-Ohana | Portfolio</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      max-width: 600px;
+    }
+
+    .button {
+      padding: 12px 24px;
+      background-color: #007aff;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #005fcc;
+    }
+
+    .lang-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 3;
+    }
+
+    .lang-toggle a {
+      color: white;
+      margin-left: 12px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
-  <h1>👋 היי, אני חזי</h1>
-  <p>ברוכים הבאים לפורטפוליו שלי. כאן תמצאו פרויקטים שבניתי לאחרונה – כלים, קוד, רעיונות ועוד. לחצו על אחד מהם כדי להיכנס לפרטים!</p>
-
-  <div class="project-card" onclick="window.location.href='project1.html'">
-    <h2>🛠️ סקרייפר לינקדאין אוטומטי</h2>
-    <p>כלי שכתבתי ב-Python ו-Selenium שמבצע חיפוש, שליחת בקשות, מעקב סטטוס, ושמירה לאקסל – אוטומציה מלאה לאנשי שיווק ומחפשי עבודה.</p>
-    <a href="project1.html">לעמוד הפרויקט →</a>
+  <div class="overlay"></div>
+  <div class="lang-toggle">
+    <a href="index.html">EN</a> | <a href="index-he.html">HE</a>
+  </div>
+  <div class="content">
+    <h1>Hi, I'm Jezy</h1>
+    <p>I'm an automation enthusiast, data tinkerer, and creator of helpful tech tools. Explore my projects below.</p>
+    <button class="button" onclick="window.location.href='project1.html'">View My Projects</button>
   </div>
 </body>
 </html>

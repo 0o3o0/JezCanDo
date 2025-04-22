@@ -18,30 +18,39 @@
   <div class="floating-project proj4" id="proj4">Coming Soon</div>
 
   <svg class="connector">
-    <line id="line1" x1="0" y1="0" x2="0" y2="0" />
-    <line id="line2" x1="0" y1="0" x2="0" y2="0" />
-    <line id="line3" x1="0" y1="0" x2="0" y2="0" />
-    <line id="line4" x1="0" y1="0" x2="0" y2="0" />
+    <path id="path1" fill="none" stroke="white" stroke-opacity="0.3" stroke-width="1" />
+    <path id="path2" fill="none" stroke="white" stroke-opacity="0.3" stroke-width="1" />
+    <path id="path3" fill="none" stroke="white" stroke-opacity="0.3" stroke-width="1" />
+    <path id="path4" fill="none" stroke="white" stroke-opacity="0.3" stroke-width="1" />
   </svg>
 
   <script>
-    function connectElements(lineId, startEl, endEl) {
-      const line = document.getElementById(lineId);
-      const start = document.getElementById(startEl).getBoundingClientRect();
-      const end = document.getElementById(endEl).getBoundingClientRect();
+    function generatePath(startEl, endEl) {
+      const start = startEl.getBoundingClientRect();
+      const end = endEl.getBoundingClientRect();
       const svg = document.querySelector(".connector").getBoundingClientRect();
 
-      line.setAttribute("x1", start.left + start.width / 2 - svg.left);
-      line.setAttribute("y1", start.top + start.height / 2 - svg.top);
-      line.setAttribute("x2", end.left + end.width / 2 - svg.left);
-      line.setAttribute("y2", end.top + end.height / 2 - svg.top);
+      const x1 = start.left + start.width / 2 - svg.left;
+      const y1 = start.top + start.height / 2 - svg.top;
+      const x2 = end.left + end.width / 2 - svg.left;
+      const y2 = end.top + end.height / 2 - svg.top;
+
+      const dx = Math.abs(x2 - x1) * 0.4;
+      const dy = Math.abs(y2 - y1) * 0.4;
+
+      const cx1 = x1 + (x2 > x1 ? dx : -dx);
+      const cy1 = y1;
+      const cx2 = x2 - (x2 > x1 ? dx : -dx);
+      const cy2 = y2;
+
+      return `M${x1},${y1} C${cx1},${cy1} ${cx2},${cy2} ${x2},${y2}`;
     }
 
     function drawConnections() {
-      connectElements("line1", "center", "proj1");
-      connectElements("line2", "center", "proj2");
-      connectElements("line3", "center", "proj3");
-      connectElements("line4", "center", "proj4");
+      document.getElementById("path1").setAttribute("d", generatePath(document.getElementById("center"), document.getElementById("proj1")));
+      document.getElementById("path2").setAttribute("d", generatePath(document.getElementById("center"), document.getElementById("proj2")));
+      document.getElementById("path3").setAttribute("d", generatePath(document.getElementById("center"), document.getElementById("proj3")));
+      document.getElementById("path4").setAttribute("d", generatePath(document.getElementById("center"), document.getElementById("proj4")));
     }
 
     window.addEventListener("load", drawConnections);

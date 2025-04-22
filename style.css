@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  background: transparent;
+  color: white;
+}
+
+canvas#stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: block;
+  background: transparent;
+}
+
+section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  flex-direction: column;
+}
+
+.intro, .cta {
+  background: transparent;
+  z-index: 3;
+}
+
+.intro h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.intro p {
+  font-size: 1.3rem;
+  max-width: 600px;
+}
+
+.cta button {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  background-color: #00bcd4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cta button:hover {
+  background-color: #0097a7;
+}
+
+.phone-number {
+  margin-top: 15px;
+  font-size: 1.4rem;
+  display: none;
+}
+
+.overlay {
+  display: none;
+}
+
+.central-node {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 20px 40px;
+  border-radius: 16px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  z-index: 3;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.floating-project {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+  z-index: 2;
+  color: white;
+  animation: float 5s ease-in-out infinite;
+  cursor: pointer;
+}
+
+.floating-project:hover {
+  transform: scale(1.05);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+
+.proj1 { top: 20%; left: 10%; animation-delay: 0s; }
+.proj2 { top: 35%; right: 12%; animation-delay: 1s; }
+.proj3 { bottom: 25%; left: 12%; animation-delay: 2s; }
+.proj4 { bottom: 30%; right: 10%; animation-delay: 3s; }
+
+svg.connector {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: visible;
+}
+
+svg.connector path {
+  stroke: rgba(255, 255, 255, 1);
+  stroke-width: 2;
+  fill: none;
+}

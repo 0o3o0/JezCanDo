@@ -28,10 +28,10 @@
     <div class="floating-project proj4" id="proj4">Coming Soon</div>
 
     <svg class="connector">
-      <path id="path1" fill="none" stroke="white" stroke-opacity="0.3" stroke-width="1" />
-      <path id="path2" fill="none" stroke="white" stroke-opacity="0.3" stroke-width="1" />
-      <path id="path3" fill="none" stroke="white" stroke-opacity="0.3" stroke-width="1" />
-      <path id="path4" fill="none" stroke="white" stroke-opacity="0.3" stroke-width="1" />
+      <path id="path1" />
+      <path id="path2" />
+      <path id="path3" />
+      <path id="path4" />
     </svg>
   </section>
 
@@ -44,6 +44,7 @@
     </div>
   </section>
 
+  <!-- Starfield JS -->
   <script>
     const canvas = document.getElementById('stars');
     const ctx = canvas.getContext('2d');
@@ -88,7 +89,10 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
     animateStars();
+  </script>
 
+  <!-- Connection Lines Script -->
+  <script>
     function generatePath(startEl, endEl) {
       const start = startEl.getBoundingClientRect();
       const end = endEl.getBoundingClientRect();

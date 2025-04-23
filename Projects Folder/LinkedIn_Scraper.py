@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from selenium.common.exceptions import TimeoutException, NoSuchElementException, StaleElementReferenceException
 import time
 import pandas as pd
 import random
@@ -10,11 +10,9 @@ import random
 # === CONFIG ===
 EMAIL = "Insert_your_LinkedIn_email_here"
 PASSWORD = "Insert_your_password"
-BASE_SEARCH_URL = (
-    "https://www.linkedin.com/search/results/people/?geoUrn=%5B%22101620260%22%5D&keywords=finance&origin=FACETED_SEARCH&sid=e6%40"
-)
-START_PAGE = 4     # מאיזה עמוד להתחיל
-END_PAGE = 8      # איפה לעצור
+BASE_SEARCH_URL = ( "https://www.linkedin.com/search/results/people/?geoUrn=%5B%22101620260%22%5D&keywords=finance&origin=FACETED_SEARCH&sid=e6%40" )
+START_PAGE = 16
+END_PAGE = 22
 SCROLL_PAUSE = 2
 PAGE_LOAD_SLEEP = 3
 
@@ -75,16 +73,25 @@ for entry in profiles:
     driver.get(link)
     time.sleep(PAGE_LOAD_SLEEP)
 
-    # Debug: list button texts and aria-labels
-    for b in driver.find_elements(By.TAG_NAME, "button"):
-        txt = b.text.strip()
-        aria = b.get_attribute('aria-label') or ''
-        if txt or aria:
-            print(f"    ▶️ text={txt!r}, aria_label={aria!r}")
+    # ✅ Updated button scan with stale-safe access
+    try:
+        buttons = driver.find_elements(By.TAG_NAME, "button")
+        for i in range(len(buttons)):
+            try:
+                btn = driver.find_elements(By.TAG_NAME, "button")[i]
+                txt = btn.text.strip()
+                aria = btn.get_attribute('aria-label') or ''
+                if txt or aria:
+                    print(f"    ▶️ text={txt!r}, aria_label={aria!r}")
+            except StaleElementReferenceException:
+                print("    ⚠️ Skipped stale button.")
+            except Exception as e:
+                print(f"    ⚠️ Unexpected button error: {e}")
+    except Exception as e:
+        print(f"    ⚠️ Could not list buttons: {e}")
 
     status = ""
     try:
-        # Send new connection request
         invite_buttons = driver.find_elements(
             By.XPATH,
             "//button[contains(@aria-label,'Invite') and contains(@aria-label,'to connect')]"
@@ -132,5 +139,5 @@ except Exception as e:
 
 df = pd.DataFrame(results, columns=["Name", "Title", "LinkedIn URL", "Connection"])
 df.drop_duplicates(subset=['LinkedIn URL'], inplace=True)
-df.to_csv('linkedin_leads1.csv', index=False)
-print("✅ Done! Leads saved to linkedin_leads1.csv")
+df.to_csv('linkedin_leads24.csv', index=False)
+print("✅ Done! Leads saved to linkedin_leads24.csv")

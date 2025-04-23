@@ -11,10 +11,7 @@ import random
 EMAIL = "Insert_your_LinkedIn_email_here"
 PASSWORD = "Insert_your_password"
 BASE_SEARCH_URL = (
-    "https://www.linkedin.com/search/results/people/"
-    "?geoUrn=%5B%22101620260%22%5D"
-    "&keywords=revenue%20operations%20manager"
-    "&origin=FACETED_SEARCH"
+    "https://www.linkedin.com/search/results/people/?geoUrn=%5B%22101620260%22%5D&keywords=finance&origin=FACETED_SEARCH&sid=e6%40"
 )
 START_PAGE = 4     # מאיזה עמוד להתחיל
 END_PAGE = 8      # איפה לעצור

@@ -5,91 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LinkedIn Scraper Project</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-      background: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-      height: 100vh;
-      overflow: auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: 1;
-    }
-
-    .project-box {
-      position: relative;
-      z-index: 2;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 40px;
-      max-width: 700px;
-      margin: 40px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
-
-    p, li {
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-
-    ul {
-      padding-left: 20px;
-      margin-bottom: 20px;
-    }
-
-    a {
-      color: #4fc3f7;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .back-link {
-      margin-top: 30px;
-      display: inline-block;
-      color: #fff;
-    }
-  </style>
 </head>
 <body>
-  <div class="overlay"></div>
-  <div class="project-box">
+  <div class="background"></div>
+  <canvas id="stars"></canvas>
+
+  <section class="intro">
     <h1>🔎 LinkedIn Scraper Automation</h1>
     <p>This project is a LinkedIn automation tool I built using Python and Selenium. It performs the following actions:</p>
-    <ul>
-      <li>Searches for relevant profiles on LinkedIn based on specific keywords</li>
-      <li>Sends automated connection requests</li>
-      <li>Tracks connection status for each profile</li>
-      <li>Exports the collected data + statuses into an Excel file</li>
+    <ul style="text-align: left; max-width: 600px; margin: 20px auto;">
+      <li>🔍 Searches for relevant profiles on LinkedIn based on specific keywords</li>
+      <li>🤝 Sends automated connection requests</li>
+      <li>📊 Tracks connection status for each profile</li>
+      <li>📁 Exports the collected data + statuses into an Excel file</li>
     </ul>
     <p>This project is especially useful for job seekers, marketers, or anyone wanting to generate leads on LinkedIn in a smart, automated way.</p>
-    <p>
-      📁 View the code here:
-      <a href="<a href="https://github.com/0o3o0/Jezcando/tree/main/projects folder/linkedin-scraper.py" target="_blank">
-  View the code here
-</a>
-" target="_blank">https://github.com/0o3o0/Jezcando</a>
-    </p>
-    <a class="back-link" href="index.html">← Back to Home</a>
-  </div>
+
+    <a 
+      href="https://github.com/0o3o0/Jezcando/tree/main/projects/linkedin-scraper" 
+      target="_blank"
+      style="margin-top: 20px; font-size: 1.2rem; display: inline-block; padding: 10px 20px; background-color: #00bcd4; color: white; border-radius: 8px; text-decoration: none;"
+    >
+      📂 View the code here
+    </a>
+
+    <br /><br />
+    <a class="back-link" href="index.html" style="color: white; text-decoration: underline; margin-top: 30px;">← Back to Home</a>
+  </section>
+
+  <script>
+    const canvas = document.getElementById('stars');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let stars = [];
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        generateStars();
+      }
+
+      function generateStars() {
+        stars = [];
+        for (let i = 0; i < 150; i++) {
+          stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 1.2 + 0.2,
+            dx: (Math.random() - 0.5) * 0.5,  // faster
+            dy: (Math.random() - 0.5) * 0.5
+          });
+        }
+      }
+
+      function animateStars() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'white';
+        stars.forEach(star => {
+          star.x += star.dx;
+          star.y += star.dy;
+
+          if (star.x < 0 || star.x > canvas.width) star.dx *= -1;
+          if (star.y < 0 || star.y > canvas.height) star.dy *= -1;
+
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        requestAnimationFrame(animateStars);
+      }
+
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+      animateStars();
+    }
+  </script>
 </body>
 </html>

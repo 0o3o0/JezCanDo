@@ -8,8 +8,8 @@ import pandas as pd
 import random
 
 # === CONFIG ===
-EMAIL = "jezimirson@gmail.com"
-PASSWORD = "jellowfish737"
+EMAIL = "Insert_your_LinkedIn_email_here"
+PASSWORD = "Insert_your_password"
 BASE_SEARCH_URL = (
     "https://www.linkedin.com/search/results/people/"
     "?geoUrn=%5B%22101620260%22%5D"

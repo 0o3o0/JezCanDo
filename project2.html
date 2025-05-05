@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🤖 LinkedIn Message Automation</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background"></div>
+  <canvas id="stars"></canvas>
+
+  <section class="intro">
+    <h1>🤖 LinkedIn Message Automation</h1>
+    <p>This project automates personalized outreach on LinkedIn using Python and Selenium. Key features include:</p>
+    <ul style="text-align: left; max-width: 600px; margin: 20px auto;">
+      <li>📥 Reads an Excel file of LinkedIn profile URLs</li>
+      <li>🔀 For each profile, selects one of four pre-defined message templates (rule-based)</li>
+      <li>✉️ Sends the chosen message via LinkedIn’s messaging interface</li>
+      <li>📝 Logs success/failure status for each profile</li>
+      <li>📂 Exports results to a new CSV file with profile URL and message status</li>
+    </ul>
+
+    <a 
+      href="https://github.com/0o3o0/Jezcando/blob/main/Projects%20Folder/LinkedIn_Message_Automation.py" 
+      target="_blank"
+      style="margin-top: 20px; font-size: 1.2rem; display: inline-block; padding: 10px 20px; background-color: #00bcd4; color: white; border-radius: 8px; text-decoration: none;"
+    >
+      📂 View the code here
+    </a>
+
+    <br /><br />
+    <a class="back-link" href="index.html" style="color: white; text-decoration: underline; margin-top: 30px;">← Back to Home</a>
+  </section>
+
+  <script>
+    const canvas = document.getElementById('stars');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let stars = [];
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        generateStars();
+      }
+
+      function generateStars() {
+        stars = [];
+        for (let i = 0; i < 150; i++) {
+          stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 1.2 + 0.2,
+            dx: (Math.random() - 0.5) * 0.5,
+            dy: (Math.random() - 0.5) * 0.5
+          });
+        }
+      }
+
+      function animateStars() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'white';
+        stars.forEach(star => {
+          star.x += star.dx;
+          star.y += star.dy;
+
+          if (star.x < 0 || star.x > canvas.width) star.dx *= -1;
+          if (star.y < 0 || star.y > canvas.height) star.dy *= -1;
+
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        requestAnimationFrame(animateStars);
+      }
+
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+      animateStars();
+    }
+  </script>
+</body>
+</html>

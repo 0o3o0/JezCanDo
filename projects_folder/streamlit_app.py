@@ -69,10 +69,41 @@ st.markdown(
         outline: none !important;
     }
 
-    /* Tabs active color -> blue */
+    /* ===== Tabs (text + hover + selected + underline) ===== */
+
+    /* Default tab label color */
+    .stTabs [data-baseweb="tab"] [data-testid="stMarkdownContainer"] p {
+        color: #e5e7eb !important;
+    }
+
+    /* Hover tab label color */
+    .stTabs [data-baseweb="tab"]:hover [data-testid="stMarkdownContainer"] p {
+        color: #93c5fd !important;
+    }
+
+    /* Active tab label color */
+    .stTabs [data-baseweb="tab"][aria-selected="true"] [data-testid="stMarkdownContainer"] p {
+        color: #93c5fd !important;
+        font-weight: 600 !important;
+    }
+
+    /* Active tab underline (real indicator in BaseWeb) */
+    .stTabs [data-baseweb="tab-highlight"] {
+        background-color: #3b82f6 !important;
+    }
+
+    /* Fallback for some Streamlit versions (if underline is border-based) */
     button[role="tab"][aria-selected="true"] {
         color: #93c5fd !important;
         border-bottom-color: #3b82f6 !important;
+    }
+
+    /* Optional: links hover (if any text turns red because it's a link) */
+    a, a:visited {
+        color: #93c5fd !important;
+    }
+    a:hover, a:active, a:focus {
+        color: #60a5fa !important;
     }
 
     /* Expander header subtle blue tint on hover */

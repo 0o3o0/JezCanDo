@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ad Campaign Action Planner</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* כפתורים אחידים בכחול */
+    .cta-btn {
+      margin-top: 14px;
+      font-size: 1.05rem;
+      display: inline-block;
+      padding: 10px 18px;
+      background-color: #00bcd4;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    .cta-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .cta-btn.secondary {
+      background-color: #1e88e5;
+    }
+
+    .project-note {
+      opacity: 0.9;
+      font-size: 0.95rem;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    .embed-wrap {
+      margin: 24px auto 0;
+      width: 100%;
+      max-width: 1100px;
+      display: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(0,0,0,0.25);
+    }
+
+    .embed-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.06);
+      color: white;
+      font-weight: 600;
+      flex-wrap: wrap;
+    }
+
+    .embed-header .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .embed-btn {
+      font-size: 0.9rem;
+      padding: 7px 12px;
+      border-radius: 7px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      color: white;
+      background: #1e88e5;
+    }
+
+    .embed-btn.alt {
+      background: #455a64;
+    }
+
+    #plannerFrame {
+      width: 100%;
+      height: 78vh;
+      min-height: 620px;
+      border: 0;
+      background: #050b16;
+    }
+
+    .btn-row {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+  <canvas id="stars"></canvas>
+
+  <section class="intro">
+    <h1>📊 Ad Campaign Action Planner</h1>
+
+    <p>
+      This project is an AdTech-focused analytics tool I built to transform campaign performance exports
+      (Excel / CSV) into a practical, prioritized action plan.
+    </p>
+
+    <ul style="text-align: left; max-width: 760px; margin: 20px auto; line-height: 1.7;">
+      <li>📥 Uploads campaign performance data from Excel / CSV</li>
+      <li>🧹 Cleans and validates rows (with invalid-row quarantine option)</li>
+      <li>📈 Calculates KPI metrics like Response Rate, Fill Rate, RPM, and more</li>
+      <li>🧠 Detects bottlenecks across Demand / Supply / Monetization / IVT</li>
+      <li>✅ Generates recommendations + executive action plan for optimization</li>
+    </ul>
+
+    <p>
+      The goal is to shorten the path from raw data to clear operational decisions
+      for AdOps / Demand / Yield / RevOps teams.
+    </p>
+
+    <div class="btn-row">
+      <a
+        href="https://YOUR_STREAMLIT_APP_URL"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="cta-btn"
+      >
+        🚀 Open Live Planner
+      </a>
+
+      <button id="toggleEmbedBtn" class="cta-btn secondary" type="button">
+        🖼️ Show inside this page
+      </button>
+
+      <a
+        href="https://YOUR_REPO_URL"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="cta-btn"
+      >
+        📂 View project code
+      </a>
+    </div>
+
+    <p class="project-note">
+      If embedded view doesn't load, it usually means the hosting service blocks iframe embedding.
+      In that case, use <strong>Open Live Planner</strong>.
+    </p>
+
+    <!-- Embed panel -->
+    <div id="embedWrap" class="embed-wrap">
+      <div class="embed-header">
+        <span>Ad Campaign Action Planner (Embedded View)</span>
+        <div class="actions">
+          <a
+            class="embed-btn"
+            href="https://YOUR_STREAMLIT_APP_URL"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open in new tab
+          </a>
+          <button id="closeEmbedBtn" class="embed-btn alt" type="button">Close</button>
+        </div>
+      </div>
+      <iframe
+        id="plannerFrame"
+        title="Ad Campaign Action Planner"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        src=""
+      ></iframe>
+    </div>
+
+    <br /><br />
+    <a class="back-link" href="index.html" style="color: white; text-decoration: underline; margin-top: 30px;">
+      ← Back to Home
+    </a>
+  </section>
+
+  <script>
+    // ===== Stars background (same style as your other page) =====
+    const canvas = document.getElementById('stars');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let stars = [];
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        generateStars();
+      }
+
+      function generateStars() {
+        stars = [];
+        for (let i = 0; i < 150; i++) {
+          stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 1.2 + 0.2,
+            dx: (Math.random() - 0.5) * 0.5,
+            dy: (Math.random() - 0.5) * 0.5
+          });
+        }
+      }
+
+      function animateStars() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'white';
+        stars.forEach(star => {
+          star.x += star.dx;
+          star.y += star.dy;
+
+          if (star.x < 0 || star.x > canvas.width) star.dx *= -1;
+          if (star.y < 0 || star.y > canvas.height) star.dy *= -1;
+
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        requestAnimationFrame(animateStars);
+      }
+
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+      animateStars();
+    }
+
+    // ===== Embed toggle =====
+    (function () {
+      const APP_URL = "https://YOUR_STREAMLIT_APP_URL"; // <-- replace
+      const toggleBtn = document.getElementById("toggleEmbedBtn");
+      const closeBtn = document.getElementById("closeEmbedBtn");
+      const wrap = document.getElementById("embedWrap");
+      const frame = document.getElementById("plannerFrame");
+
+      if (!toggleBtn || !wrap || !frame) return;
+
+      toggleBtn.addEventListener("click", () => {
+        const isOpen = wrap.style.display === "block";
+
+        if (!isOpen) {
+          wrap.style.display = "block";
+          if (!frame.src) frame.src = APP_URL;
+          toggleBtn.textContent = "🙈 Hide embedded view";
+          wrap.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          wrap.style.display = "none";
+          toggleBtn.textContent = "🖼️ Show inside this page";
+        }
+      });
+
+      if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
+          wrap.style.display = "none";
+          toggleBtn.textContent = "🖼️ Show inside this page";
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

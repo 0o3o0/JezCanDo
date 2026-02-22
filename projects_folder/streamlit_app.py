@@ -279,7 +279,7 @@ st.caption("Upload Excel/CSV → Analyze → Get Executive Action Plan")
 # --- Upload guidance (visible short text + expander) ---
 
 with st.expander("**Required Fields:** requests, responses, impressions, revenue + one entity field "
-    "(advertiser/publisher) and one supply field (supplier/bundle/site/app). " \
+    "(advertiser/publisher) and one supply field (supplier/bundle/site/app).                 " \
     "                                                                           "
     "**Recommended:** bundle_id, date, geo/country, device, format, campaign_id, "
     "and IVT fields (SIVT/GIVT). "

@@ -182,3 +182,21 @@ svg.connector path {
 .cta .text-backdrop .phone-number {
   margin-top: 10px;
 }
+.background {
+  position: fixed;      /* או absolute אם זה מה שכבר עובד אצלך */
+  inset: 0;
+  z-index: -2;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);  /* שנה ל-0.7 אם אתה רוצה כהה יותר */
+  z-index: 1;
+  pointer-events: none;
+}
+

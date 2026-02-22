@@ -783,13 +783,13 @@ def main() -> None:
     summary_path = output_dir / f"summary_{ts}.json"
     action_plan_path = output_dir / f"action_plan_{ts}.csv"
 
-    df.to_csv(enriched_path, index=False)
-    recs.to_csv(recs_path, index=False)
-    action_plan.to_csv(action_plan_path, index=False)
-
+    df.to_csv(enriched_path, index=False, encoding="utf-8-sig")
+    recs.to_csv(recs_path, index=False, encoding="utf-8-sig")
+    action_plan.to_csv(action_plan_path, index=False, encoding="utf-8-sig")
 
     if not invalid_rows.empty:
-        invalid_rows.to_csv(invalid_path, index=False)
+        invalid_rows.to_csv(invalid_path, index=False, encoding="utf-8-sig")
+
 
     summary = summarize(df, recs, invalid_rows)
     summary["action_plan_count"] = int(len(action_plan))

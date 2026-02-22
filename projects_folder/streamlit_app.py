@@ -135,7 +135,7 @@ st.markdown(
         line-height: 1.45;
         font-size: 0.92rem;
     ">
-        <b>Required:</b> requests, responses, impressions, revenue + one entity field and one supply field.<br>
+        <b>Required Fields:</b> requests, responses, impressions, revenue + one entity field and one supply field.<br>
         <b>Recommended:</b> bundle_id, date, geo/country, device, format, campaign_id, and IVT fields (SIVT/GIVT).
     </div>
     """,

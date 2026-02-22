@@ -285,12 +285,36 @@ short_help = (
 )
 
 # שורה אחת: expander + אייקון מידע
-c_help, c_tip = st.columns([0.965, 0.035], vertical_alignment="center")
+# --- Upload guidance (visible short text + expander) ---
+short_help_visible = (
+    "**Required Fields:** requests, responses, impressions, revenue + one entity field "
+    "(advertiser/publisher) and one supply field (supplier/bundle/site/app). "
+    "**Recommended:** bundle_id, date, geo/country, device, format, campaign_id, "
+    "and IVT fields (SIVT/GIVT). "
+    "_Click for more info below._"
+)
 
-with c_help:
-    with st.expander("What should the file include?", expanded=False):
-        st.markdown(
-            """
+st.markdown(
+    f"""
+    <div style="
+        margin: 0.25rem 0 0.45rem 0;
+        padding: 0.65rem 0.8rem;
+        border-radius: 10px;
+        border: 1px solid rgba(59,130,246,0.22);
+        background: rgba(37,99,235,0.08);
+        color: #dbeafe;
+        font-size: 0.92rem;
+        line-height: 1.4;
+    ">
+        {short_help_visible}
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+with st.expander("What should the file include?", expanded=False):
+    st.markdown(
+        """
 **Required metrics** (exact names not required if common aliases exist):
 - `requests`
 - `responses`
@@ -313,13 +337,7 @@ with c_help:
 - Avoid totals/summary rows mixed into raw data
 - In multi-sheet Excel, if no sheet is selected, the app tries to auto-pick the best sheet
 """
-        )
-
-with c_tip:
-    # אייקון יותר "זורם" לאתר
-    with st.popover("🛈", use_container_width=True):
-        st.markdown(short_help)
-
+    )
 
 # =========================================================
 # Helpers

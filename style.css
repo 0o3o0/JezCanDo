@@ -157,12 +157,12 @@ svg.connector path {
 /* Black transparent background behind text blocks */
 .text-backdrop {
   display: inline-block;
-  background: rgba(0, 0, 0, 0.7); /* 70% black */
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 16px 20px;
   border-radius: 14px;
-  backdrop-filter: blur(2px); /* optional but nice */
+  backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
-  max-width: min(90vw, 760px);
 }
 
 /* Optional: make sure text stays readable */

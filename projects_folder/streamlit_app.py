@@ -123,7 +123,8 @@ st.title("Ad Campaign Action Planner")
 st.caption("Upload Excel/CSV → Analyze → Get Executive Action Plan")
 
 # --- Upload guidance (aligned with src/app.py behavior) ---
-st.caption("Required: requests, responses, impressions, revenue + at least one entity field (advertiser_id/advertiser_name/publisher_id/publisher_name) and one supply field (supplier_id/bundle_id/site/app). Recommended for better optimization: bundle_id, date, country/geo, device, format, campaign_id, and IVT fields (SIVT/GIVT).")
+st.caption("Required Fieldes: requests, responses, impressions, revenue + at least one entity field (advertiser_id/advertiser_name/publisher_id/publisher_name) and one supply field (supplier_id/bundle_id/site/app)."
+           " Recommended for better optimization: bundle_id, date, country/geo, device, format, campaign_id, and IVT fields (SIVT/GIVT).")
 
 
 with st.expander("What should the file include?", expanded=False):

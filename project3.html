@@ -132,15 +132,10 @@
         🚀 Open Live Planner
       </a>
 
-      <button id="toggleEmbedBtn" class="cta-btn secondary" type="button">
-        🖼️ Show inside this page
-      </button>
+
     </div>
 
-    <p class="project-note">
-      If embedded view doesn't load, it usually means the hosting service blocks iframe embedding.
-      In that case, use <strong>Open Live Planner</strong>.
-    </p>
+
 
     <!-- Embed panel -->
     <div id="embedWrap" class="embed-wrap">
@@ -239,18 +234,8 @@
           if (!frame.src) frame.src = APP_URL;
           toggleBtn.textContent = "🙈 Hide embedded view";
           wrap.scrollIntoView({ behavior: "smooth", block: "start" });
-        } else {
-          wrap.style.display = "none";
-          toggleBtn.textContent = "🖼️ Show inside this page";
         }
       });
-
-      if (closeBtn) {
-        closeBtn.addEventListener("click", () => {
-          wrap.style.display = "none";
-          toggleBtn.textContent = "🖼️ Show inside this page";
-        });
-      }
     })();
   </script>
 </body>

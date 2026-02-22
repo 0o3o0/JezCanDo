@@ -250,6 +250,23 @@ st.markdown(
         border-radius: 6px;
         color: #dbeafe;
     }
+        /* Make the popover button look like a small dark icon button */
+    div[data-testid="stPopover"] button {
+        min-height: 2.2rem !important;
+        height: 2.2rem !important;
+        padding: 0 !important;
+        border-radius: 10px !important;
+        border: 1px solid rgba(59,130,246,0.30) !important;
+        background: rgba(37,99,235,0.08) !important;
+        color: #bfdbfe !important;
+        font-size: 0.95rem !important;
+    }
+    div[data-testid="stPopover"] button:hover {
+        border-color: #3b82f6 !important;
+        background: rgba(37,99,235,0.16) !important;
+        color: #dbeafe !important;
+    }
+
     </style>
     """,
     unsafe_allow_html=True,

@@ -539,7 +539,7 @@ if st.session_state.analysis_ready and st.session_state.last_run_dir:
             st.dataframe(df_action, use_container_width=True, height=500)
             st.download_button(
                 "Download Action Plan CSV",
-                df_action.to_csv(index=False).encode("utf-8"),
+                df_action.to_csv(index=False).encode("utf-8-sig"),
                 file_name="action_plan.csv",
                 mime="text/csv",
                 key=f"dl_action_plan_table_{run_id}",
@@ -553,7 +553,7 @@ if st.session_state.analysis_ready and st.session_state.last_run_dir:
             st.dataframe(df_recs, use_container_width=True, height=500)
             st.download_button(
                 "Download Recommendations CSV",
-                df_recs.to_csv(index=False).encode("utf-8"),
+                df_recs.to_csv(index=False).encode("utf-8-sig"),
                 file_name="recommendations.csv",
                 mime="text/csv",
                 key=f"dl_recommendations_table_{run_id}",
@@ -567,7 +567,7 @@ if st.session_state.analysis_ready and st.session_state.last_run_dir:
             st.dataframe(df_enriched.head(2000), use_container_width=True, height=500)
             st.download_button(
                 "Download Enriched KPIs CSV",
-                df_enriched.to_csv(index=False).encode("utf-8"),
+                df_enriched.to_csv(index=False).encode("utf-8-sig"),
                 file_name="enriched_kpis.csv",
                 mime="text/csv",
                 key=f"dl_enriched_table_{run_id}",
@@ -581,7 +581,7 @@ if st.session_state.analysis_ready and st.session_state.last_run_dir:
             st.dataframe(df_invalid, use_container_width=True, height=350)
             st.download_button(
                 "Download Invalid Rows CSV",
-                df_invalid.to_csv(index=False).encode("utf-8"),
+                df_invalid.to_csv(index=False).encode("utf-8-sig"),
                 file_name="invalid_rows.csv",
                 mime="text/csv",
                 key=f"dl_invalid_table_{run_id}",

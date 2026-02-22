@@ -277,22 +277,6 @@ st.caption("Upload Excel/CSV → Analyze → Get Executive Action Plan")
 
 # שורה אחת: expander + אייקון מידע
 # --- Upload guidance (visible short text + expander) ---
-st.markdown(
-    f"""
-    <div style="
-        margin: 0.25rem 0 0.45rem 0;
-        padding: 0.65rem 0.8rem;
-        border-radius: 10px;
-        border: 1px solid rgba(59,130,246,0.22);
-        background: rgba(37,99,235,0.08);
-        color: #dbeafe;
-        font-size: 0.92rem;
-        line-height: 1.4;
-    ">
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
 
 with st.expander("**Required Fields:** requests, responses, impressions, revenue + one entity field "
     "(advertiser/publisher) and one supply field (supplier/bundle/site/app). "

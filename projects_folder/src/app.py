@@ -807,8 +807,6 @@ def main() -> None:
         print(f"Saved: {invalid_path}")
     print(f"Saved: {summary_path}")
     print(f"Saved: {action_plan_path}")
-    print(f"Saved: {action_plan_latest_path}")
-
 
 if __name__ == "__main__":
     main()

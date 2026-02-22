@@ -312,7 +312,11 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-with st.expander("What should the file include?", expanded=False):
+with st.expander("**Required Fields:** requests, responses, impressions, revenue + one entity field "
+    "(advertiser/publisher) and one supply field (supplier/bundle/site/app). "
+    "**Recommended:** bundle_id, date, geo/country, device, format, campaign_id, "
+    "and IVT fields (SIVT/GIVT). "
+    "_Click for more info below._", expanded=False):
     st.markdown(
         """
 **Required metrics** (exact names not required if common aliases exist):

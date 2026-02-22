@@ -114,6 +114,142 @@ st.markdown(
         background: rgba(37, 99, 235, 0.06);
         border-radius: 8px;
     }
+
+    /* ===== Custom file-help expander with inline info tooltip ===== */
+    .file-help-wrap {
+        margin: 0.35rem 0 0.75rem 0;
+    }
+
+    .file-help {
+        border: 1px solid rgba(148, 163, 184, 0.20);
+        border-radius: 10px;
+        background: rgba(15, 23, 42, 0.25);
+        overflow: visible; /* IMPORTANT: allow tooltip to overflow */
+    }
+
+    .file-help summary {
+        list-style: none;
+        cursor: pointer;
+        padding: 0.7rem 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        user-select: none;
+        position: relative;
+        border-radius: 10px;
+    }
+
+    .file-help summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .file-help summary:hover {
+        background: rgba(37, 99, 235, 0.06);
+    }
+
+    .file-help-chevron {
+        width: 10px;
+        height: 10px;
+        border-right: 2px solid #93c5fd;
+        border-bottom: 2px solid #93c5fd;
+        transform: rotate(-45deg);
+        transition: transform 0.18s ease;
+        margin-top: -2px;
+        flex: 0 0 auto;
+    }
+
+    .file-help[open] .file-help-chevron {
+        transform: rotate(45deg);
+        margin-top: -4px;
+    }
+
+    .file-help-title {
+        color: #e5e7eb;
+        font-weight: 600;
+        font-size: 0.95rem;
+        line-height: 1.2;
+    }
+
+    /* info icon + tooltip */
+    .file-help-info {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        border-radius: 999px;
+        border: 1px solid rgba(59, 130, 246, 0.35);
+        background: rgba(37, 99, 235, 0.10);
+        color: #bfdbfe;
+        flex: 0 0 auto;
+        margin-left: 2px;
+    }
+
+    .file-help-info svg {
+        width: 14px;
+        height: 14px;
+        display: block;
+    }
+
+    /* Tooltip on hover/focus */
+    .file-help-tooltip {
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.15s ease;
+        position: absolute;
+        top: 28px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        width: 430px;
+        max-width: min(430px, 82vw);
+        background: #0b1220;
+        border: 1px solid rgba(59, 130, 246, 0.30);
+        border-radius: 10px;
+        padding: 10px 12px;
+        color: #dbeafe;
+        line-height: 1.4;
+        font-size: 0.86rem;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+        pointer-events: none;
+        text-align: left;
+        white-space: normal;
+    }
+
+    .file-help-info:hover .file-help-tooltip,
+    .file-help-info:focus-within .file-help-tooltip {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    /* Body */
+    .file-help-body {
+        border-top: 1px solid rgba(148, 163, 184, 0.12);
+        padding: 0.75rem 0.95rem 0.8rem 0.95rem;
+        color: #e5e7eb;
+        font-size: 0.9rem;
+        line-height: 1.45;
+        background: rgba(2, 6, 23, 0.15);
+        border-radius: 0 0 10px 10px;
+    }
+
+    .file-help-body ul {
+        margin: 0.35rem 0 0.6rem 1.1rem;
+        padding: 0;
+    }
+
+    .file-help-body li {
+        margin: 0.2rem 0;
+    }
+
+    .file-help-body code {
+        background: rgba(148, 163, 184, 0.12);
+        border: 1px solid rgba(148, 163, 184, 0.15);
+        padding: 0.05rem 0.35rem;
+        border-radius: 6px;
+        color: #dbeafe;
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -122,48 +258,52 @@ st.markdown(
 st.title("Ad Campaign Action Planner")
 st.caption("Upload Excel/CSV → Analyze → Get Executive Action Plan")
 
-# --- Upload guidance (aligned with src/app.py behavior) ---
-short_help = (
-    "**Required:** requests, responses, impressions, revenue + "
-    "one entity field (advertiser/publisher) and one supply field (supplier/bundle/site/app).  \n"
-    "**Recommended:** bundle_id, date, geo/country, device, format, campaign_id, "
-    "and IVT fields (SIVT/GIVT)."
+# --- Custom help expander with inline tooltip (single clean UX block) ---
+st.markdown(
+    """
+    <div class="file-help-wrap">
+      <details class="file-help">
+        <summary>
+          <span class="file-help-chevron"></span>
+          <span class="file-help-title">What should the file include?</span>
+
+          <span class="file-help-info" aria-label="Quick requirements" title="">
+            <!-- Info circle icon -->
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"></circle>
+              <path d="M12 10.5V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+              <circle cx="12" cy="7.5" r="1.1" fill="currentColor"></circle>
+            </svg>
+
+            <div class="file-help-tooltip">
+              <b>Required:</b> requests, responses, impressions, revenue + one entity field (advertiser/publisher) and one supply field (supplier/bundle/site/app).<br>
+              <b>Recommended:</b> bundle_id, date, geo/country, device, format, campaign_id, and IVT fields (SIVT/GIVT).
+            </div>
+          </span>
+        </summary>
+
+        <div class="file-help-body">
+          <div><b>Required metrics</b> (exact names not required if aliases are common):</div>
+          <ul>
+            <li><code>requests</code></li>
+            <li><code>responses</code></li>
+            <li><code>impressions</code></li>
+            <li><code>revenue</code></li>
+          </ul>
+
+          <div><b>Identity fields</b> (at least one entity + one supply identifier):</div>
+          <ul>
+            <li><b>Entity:</b> <code>advertiser_id</code> / <code>advertiser_name</code> / <code>publisher_id</code> / <code>publisher_name</code></li>
+            <li><b>Supply:</b> <code>supplier_id</code> / <code>bundle_id</code> / <code>site</code> / <code>app</code></li>
+          </ul>
+
+          <div><b>Recommended for deeper optimization:</b> <code>bundle_id</code>, <code>date</code>, <code>geo/country</code>, <code>device</code>, <code>format</code>, <code>campaign_id</code>, <code>sivt</code>, <code>givt</code>.</div>
+        </div>
+      </details>
+    </div>
+    """,
+    unsafe_allow_html=True,
 )
-
-col_exp, col_info = st.columns([0.97, 0.03], vertical_alignment="center")
-
-with col_info:
-    with st.popover("ℹ️"):
-        st.markdown(short_help)
-
-with col_exp:
-    with st.expander("What should the file include?", expanded=False):
-        st.markdown(
-            """
-**Required metrics (must exist — exact names not required if aliases are common):**
-- `requests`
-- `responses`
-- `impressions`
-- `revenue`
-
-**Identity fields (at least one entity + one supply identifier is required):**
-- **Entity (at least one):** `advertiser_id` / `advertiser_name` / `publisher_id` / `publisher_name`
-- **Supply (at least one):** `supplier_id` / `bundle_id` / `site` / `app`
-
-**Recommended fields (improves optimization quality):**
-- IVT / fraud signals: `sivt`, `givt` (or equivalent aliases)
-- Segmentation: `date`, `country`/`geo`, `device`, `format`
-- Commercial / operational dimensions: `campaign_id`, `bundle_id`, `supplier_id`, `advertiser_id`
-
-**Formatting tips (recommended):**
-- First row should be headers
-- No merged cells
-- Metric columns should contain numeric values (the app does auto-cleaning for common formats like commas / `$` / `%`)
-- Avoid totals/summary rows mixed into raw data
-- For Excel files, if multiple sheets exist and no sheet is chosen, the app will try to auto-pick the best sheet
-"""
-        )
-
 
 
 # =========================================================

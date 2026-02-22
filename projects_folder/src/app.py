@@ -551,38 +551,39 @@ def build_action_plan(recs: pd.DataFrame, top_n: Optional[int] = 50) -> pd.DataF
     def immediate_action(issue: str) -> str:
         i = str(issue)
         if "IVT" in i:
-            return "להקשיח pre-bid filters, לחסום מקורות חשודים זמנית, ולפתוח audit."
+            return "Tighten pre-bid filters, temporarily block suspicious sources, and open an audit."
         if "Supply/Delivery Constraint" in i:
-            return "לבדוק floor/latency/render failures ולבודד bundles חלשים."
+            return "Review floor/latency/render failures and isolate weak bundles."
         if "Demand Constraint" in i:
-            return "להרחיב demand coverage ולהרפות מגבלות טרגוט קשיחות."
+            return "Expand demand coverage and relax overly strict targeting constraints."
         if "Monetization Problem" in i:
-            return "להריץ A/B על floor (±10%) ולשפר deal mix (Open/PMP)."
-        return "לעבור על funnel request→response→impression ולאתר root cause."
+            return "Run a floor-price A/B test (±10%) and improve deal mix (Open/PMP)."
+        return "Review the request→response→impression funnel and identify the root cause."
 
     def experiment_7d(issue: str) -> str:
         i = str(issue)
         if "IVT" in i:
-            return "ניסוי שבועי: חסימה מדורגת + מדידת IVT/Revenue לפני-אחרי."
+            return "7-day test: gradual blocking + IVT/Revenue before-vs-after measurement."
         if "Supply/Delivery Constraint" in i:
-            return "ניסוי שבועי: timeout tuning + floor segmentation לפי geo/device/format."
+            return "7-day test: timeout tuning + floor segmentation by geo/device/format."
         if "Demand Constraint" in i:
-            return "ניסוי שבועי: הרחבת partners בסגמנטים חלשים ומדידת uplift."
+            return "7-day test: expand partners in weak segments and measure uplift."
         if "Monetization Problem" in i:
-            return "ניסוי שבועי: 2–3 וריאציות pricing ובחירת policy מנצחת."
-        return "ניסוי שבועי מבוקר על הפרמטר המשפיע ביותר."
+            return "7-day test: run 2–3 pricing variants and keep the winning policy."
+        return "Run a controlled 7-day test on the highest-impact parameter."
 
     def success_kpi(issue: str) -> str:
         i = str(issue)
         if "IVT" in i:
-            return "IVT rate ↓ לפחות 30% ללא ירידה ב-Revenue."
+            return "IVT rate down by at least 30% with no revenue decline."
         if "Supply/Delivery Constraint" in i:
-            return "Fill rate ↑ 15%+ ו-Imps/Response ↑ 10%+."
+            return "Fill rate up 15%+ and Imps/Response up 10%+."
         if "Demand Constraint" in i:
-            return "Response rate ↑ 15%+ ו-Fill rate ↑ 8%+."
+            return "Response rate up 15%+ and Fill rate up 8%+."
         if "Monetization Problem" in i:
-            return "RPM ↑ 10%+ תוך שמירה על Fill יציב."
-        return "שיפור KPI ראשי מול benchmark."
+            return "RPM up 10%+ while keeping Fill stable."
+        return "Improve the primary KPI vs benchmark."
+
 
     agg["owner"] = agg["dominant_issue"].apply(owner)
     agg["immediate_action_48h"] = agg["dominant_issue"].apply(immediate_action)

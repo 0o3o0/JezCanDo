@@ -275,15 +275,6 @@ st.markdown(
 st.title("Ad Campaign Action Planner")
 st.caption("Upload Excel/CSV → Analyze → Get Executive Action Plan")
 
-# --- Custom help expander with inline tooltip (single clean UX block) ---
-# --- Upload guidance (stable Streamlit-native version) ---
-short_help = (
-    "**Required Fields:** requests, responses, impressions, revenue + one entity field "
-    "(advertiser/publisher) and one supply field (supplier/bundle/site/app).\n\n"
-    "**Recommended:** bundle_id, date, geo/country, device, format, campaign_id, "
-    "and IVT fields (SIVT/GIVT)."
-)
-
 # שורה אחת: expander + אייקון מידע
 # --- Upload guidance (visible short text + expander) ---
 st.markdown(

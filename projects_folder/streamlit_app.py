@@ -123,29 +123,23 @@ st.title("Ad Campaign Action Planner")
 st.caption("Upload Excel/CSV → Analyze → Get Executive Action Plan")
 
 # --- Upload guidance (aligned with src/app.py behavior) ---
-st.markdown(
-    """
-    <div style="
-        background: rgba(37, 99, 235, 0.10);
-        border: 1px solid rgba(59, 130, 246, 0.35);
-        border-radius: 10px;
-        padding: 10px 12px;
-        margin: 6px 0 10px 0;
-        color: #dbeafe;
-        line-height: 1.45;
-        font-size: 0.92rem;
-    ">
-        <b>Required Fields:</b> requests, responses, impressions, revenue + one entity field and one supply field.<br>
-        <b>Recommended:</b> bundle_id, date, geo/country, device, format, campaign_id, and IVT fields (SIVT/GIVT).
-    </div>
-    """,
-    unsafe_allow_html=True,
+short_help = (
+    "**Required:** requests, responses, impressions, revenue + "
+    "one entity field (advertiser/publisher) and one supply field (supplier/bundle/site/app).  \n"
+    "**Recommended:** bundle_id, date, geo/country, device, format, campaign_id, "
+    "and IVT fields (SIVT/GIVT)."
 )
 
+col_exp, col_info = st.columns([0.97, 0.03], vertical_alignment="center")
 
-with st.expander("What should the file include?", expanded=False):
-    st.markdown(
-        """
+with col_info:
+    with st.popover("ℹ️"):
+        st.markdown(short_help)
+
+with col_exp:
+    with st.expander("What should the file include?", expanded=False):
+        st.markdown(
+            """
 **Required metrics (must exist — exact names not required if aliases are common):**
 - `requests`
 - `responses`
@@ -168,7 +162,8 @@ with st.expander("What should the file include?", expanded=False):
 - Avoid totals/summary rows mixed into raw data
 - For Excel files, if multiple sheets exist and no sheet is chosen, the app will try to auto-pick the best sheet
 """
-    )
+        )
+
 
 
 # =========================================================

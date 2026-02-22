@@ -154,3 +154,31 @@ svg.connector path {
   stroke-width: 2;
   fill: none;
 }
+/* Black transparent background behind text blocks */
+.text-backdrop {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.7); /* 70% black */
+  padding: 16px 20px;
+  border-radius: 14px;
+  backdrop-filter: blur(2px); /* optional but nice */
+  -webkit-backdrop-filter: blur(2px);
+  max-width: min(90vw, 760px);
+}
+
+/* Optional: make sure text stays readable */
+.text-backdrop h1,
+.text-backdrop h2,
+.text-backdrop p,
+.text-backdrop .phone-number {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Optional spacing for CTA button/phone inside the panel */
+.cta .text-backdrop button {
+  margin-top: 10px;
+}
+
+.cta .text-backdrop .phone-number {
+  margin-top: 10px;
+}

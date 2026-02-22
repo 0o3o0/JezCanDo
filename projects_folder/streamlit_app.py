@@ -1,4 +1,5 @@
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -6,6 +7,8 @@ from datetime import datetime
 
 import pandas as pd
 import streamlit as st
+
+SHOW_RUN_LOG = os.getenv("SHOW_RUN_LOG", "false").strip().lower() == "true"
 
 
 # =========================================================
@@ -117,7 +120,40 @@ st.markdown(
 )
 
 st.title("Ad Campaign Action Planner")
-st.caption("Upload Excel → Analyze → Get Executive Action Plan")
+st.caption("Upload Excel/CSV → Analyze → Get Executive Action Plan")
+
+# --- Upload guidance (aligned with src/app.py behavior) ---
+st.info(
+    "Upload a clean XLSX/XLS/CSV export. The app normalizes column names and supports common aliases "
+    "(so exact snake_case is not required), then validates and analyzes the data."
+)
+
+with st.expander("What should the file include?", expanded=False):
+    st.markdown(
+        """
+**Required metrics (must exist — exact names not required if aliases are common):**
+- `requests`
+- `responses`
+- `impressions`
+- `revenue`
+
+**Identity fields (at least one entity + one supply identifier is required):**
+- **Entity (at least one):** `advertiser_id` / `advertiser_name` / `publisher_id` / `publisher_name`
+- **Supply (at least one):** `supplier_id` / `bundle_id` / `site` / `app`
+
+**Recommended fields (improves optimization quality):**
+- IVT / fraud signals: `sivt`, `givt` (or equivalent aliases)
+- Segmentation: `date`, `country`/`geo`, `device`, `format`
+- Commercial / operational dimensions: `campaign_id`, `bundle_id`, `supplier_id`, `advertiser_id`
+
+**Formatting tips (recommended):**
+- First row should be headers
+- No merged cells
+- Metric columns should contain numeric values (the app does auto-cleaning for common formats like commas / `$` / `%`)
+- Avoid totals/summary rows mixed into raw data
+- For Excel files, if multiple sheets exist and no sheet is chosen, the app will try to auto-pick the best sheet
+"""
+    )
 
 
 # =========================================================
@@ -272,7 +308,13 @@ if run_clicked:
 
         if proc.returncode != 0:
             st.session_state.analysis_ready = False
-            st.session_state.last_error = "Analysis failed. Check Run Log below."
+            if SHOW_RUN_LOG:
+                st.session_state.last_error = "Analysis failed. Check Run Log below."
+            else:
+                st.session_state.last_error = (
+                    "Analysis failed. Please verify the file structure/columns and try again. "
+                    "If needed, use the sheet name setting for multi-sheet Excel files."
+                )
         else:
             # מציאת קבצי פלט מהריצה הזו
             summary_path = latest_file(run_dir, "summary_*.json")
@@ -311,7 +353,7 @@ if run_clicked:
 # 1) Big metrics dashboard
 # 2) Tabs (analysis tables)
 # 3) Downloads
-# 4) Run Log collapsed (bottom)
+# 4) Run Log collapsed (bottom, debug-only)
 # =========================================================
 if st.session_state.last_error:
     st.error(st.session_state.last_error)
@@ -404,8 +446,8 @@ if st.session_state.analysis_ready and st.session_state.last_run_dir:
 else:
     st.info("Upload a file and click Analyze to generate the dashboard.")
 
-# --- Run Log (moved to bottom, collapsed by default) ---
-if st.session_state.run_log_text:
+# --- Run Log (debug-only, hidden for regular users) ---
+if SHOW_RUN_LOG and st.session_state.run_log_text:
     st.markdown("---")
     with st.expander("Run Log", expanded=False):
         st.code(st.session_state.run_log_text, language="bash")

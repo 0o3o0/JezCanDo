@@ -471,9 +471,7 @@ if run_clicked:
         else:
             # מציאת קבצי פלט מהריצה הזו
             summary_path = latest_file(run_dir, "summary_*.json")
-            action_path = latest_file(run_dir, "action_plan_*.csv") or (
-                run_dir / "action_plan_latest.csv" if (run_dir / "action_plan_latest.csv").exists() else None
-            )
+            action_path = latest_file(run_dir, "action_plan_*.csv")
             recs_path = latest_file(run_dir, "recommendations_*.csv")
             enriched_path = latest_file(run_dir, "enriched_kpis_*.csv")
             invalid_path = latest_file(run_dir, "invalid_rows_*.csv")

@@ -272,7 +272,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.title("Adsss Operations Action Planner")
+st.title("Ads Operations Action Planner")
 st.caption("Upload Excel/CSV → Analyze → Get Executive Action Plan")
 
 # שורה אחת: expander + אייקון מידע

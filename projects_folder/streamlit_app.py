@@ -286,14 +286,6 @@ short_help = (
 
 # שורה אחת: expander + אייקון מידע
 # --- Upload guidance (visible short text + expander) ---
-short_help_visible = (
-    "**Required Fields:** requests, responses, impressions, revenue + one entity field "
-    "(advertiser/publisher) and one supply field (supplier/bundle/site/app). "
-    "**Recommended:** bundle_id, date, geo/country, device, format, campaign_id, "
-    "and IVT fields (SIVT/GIVT). "
-    "_Click for more info below._"
-)
-
 st.markdown(
     f"""
     <div style="

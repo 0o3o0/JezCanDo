@@ -259,51 +259,49 @@ st.title("Ad Campaign Action Planner")
 st.caption("Upload Excel/CSV → Analyze → Get Executive Action Plan")
 
 # --- Custom help expander with inline tooltip (single clean UX block) ---
-st.markdown(
-    """
-    <div class="file-help-wrap">
-      <details class="file-help">
-        <summary>
-          <span class="file-help-chevron"></span>
-          <span class="file-help-title">What should the file include?</span>
-
-          <span class="file-help-info" aria-label="Quick requirements" title="">
-            <!-- Info circle icon -->
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"></circle>
-              <path d="M12 10.5V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
-              <circle cx="12" cy="7.5" r="1.1" fill="currentColor"></circle>
-            </svg>
-
-            <div class="file-help-tooltip">
-              <b>Required:</b> requests, responses, impressions, revenue + one entity field (advertiser/publisher) and one supply field (supplier/bundle/site/app).<br>
-              <b>Recommended:</b> bundle_id, date, geo/country, device, format, campaign_id, and IVT fields (SIVT/GIVT).
-            </div>
-          </span>
-        </summary>
-
-        <div class="file-help-body">
-          <div><b>Required metrics</b> (exact names not required if aliases are common):</div>
-          <ul>
-            <li><code>requests</code></li>
-            <li><code>responses</code></li>
-            <li><code>impressions</code></li>
-            <li><code>revenue</code></li>
-          </ul>
-
-          <div><b>Identity fields</b> (at least one entity + one supply identifier):</div>
-          <ul>
-            <li><b>Entity:</b> <code>advertiser_id</code> / <code>advertiser_name</code> / <code>publisher_id</code> / <code>publisher_name</code></li>
-            <li><b>Supply:</b> <code>supplier_id</code> / <code>bundle_id</code> / <code>site</code> / <code>app</code></li>
-          </ul>
-
-          <div><b>Recommended for deeper optimization:</b> <code>bundle_id</code>, <code>date</code>, <code>geo/country</code>, <code>device</code>, <code>format</code>, <code>campaign_id</code>, <code>sivt</code>, <code>givt</code>.</div>
-        </div>
-      </details>
-    </div>
-    """,
-    unsafe_allow_html=True,
+# --- Upload guidance (stable Streamlit-native version) ---
+short_help = (
+    "**Required Fields:** requests, responses, impressions, revenue + one entity field "
+    "(advertiser/publisher) and one supply field (supplier/bundle/site/app).\n\n"
+    "**Recommended:** bundle_id, date, geo/country, device, format, campaign_id, "
+    "and IVT fields (SIVT/GIVT)."
 )
+
+# שורה אחת: expander + אייקון מידע
+c_help, c_tip = st.columns([0.965, 0.035], vertical_alignment="center")
+
+with c_help:
+    with st.expander("What should the file include?", expanded=False):
+        st.markdown(
+            """
+**Required metrics** (exact names not required if common aliases exist):
+- `requests`
+- `responses`
+- `impressions`
+- `revenue`
+
+**Identity fields** (at least one entity + one supply identifier):
+- **Entity (at least one):** `advertiser_id` / `advertiser_name` / `publisher_id` / `publisher_name`
+- **Supply (at least one):** `supplier_id` / `bundle_id` / `site` / `app`
+
+**Recommended for deeper optimization:**
+- IVT / fraud signals: `sivt`, `givt` (or equivalent aliases)
+- Segmentation: `date`, `country`/`geo`, `device`, `format`
+- Commercial dimensions: `campaign_id`, `bundle_id`, `supplier_id`, `advertiser_id`
+
+**Formatting tips:**
+- First row = headers
+- No merged cells
+- Metric columns should be numeric (the app auto-cleans common formats like commas / `$` / `%`)
+- Avoid totals/summary rows mixed into raw data
+- In multi-sheet Excel, if no sheet is selected, the app tries to auto-pick the best sheet
+"""
+        )
+
+with c_tip:
+    # אייקון יותר "זורם" לאתר
+    with st.popover("🛈", use_container_width=True):
+        st.markdown(short_help)
 
 
 # =========================================================

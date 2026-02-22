@@ -298,7 +298,6 @@ st.markdown(
         font-size: 0.92rem;
         line-height: 1.4;
     ">
-        {short_help_visible}
     </div>
     """,
     unsafe_allow_html=True,

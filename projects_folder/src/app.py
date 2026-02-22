@@ -780,12 +780,11 @@ def main() -> None:
     invalid_path = output_dir / f"invalid_rows_{ts}.csv"
     summary_path = output_dir / f"summary_{ts}.json"
     action_plan_path = output_dir / f"action_plan_{ts}.csv"
-    action_plan_latest_path = output_dir / "action_plan_latest.csv"
 
     df.to_csv(enriched_path, index=False)
     recs.to_csv(recs_path, index=False)
     action_plan.to_csv(action_plan_path, index=False)
-    action_plan.to_csv(action_plan_latest_path, index=False)
+
 
     if not invalid_rows.empty:
         invalid_rows.to_csv(invalid_path, index=False)

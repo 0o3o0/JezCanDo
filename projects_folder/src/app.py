@@ -401,8 +401,8 @@ def build_recommendations(
         if pd.notna(rr) and pd.notna(b_rr) and (rr < 0.8 * b_rr):
             issue_types.append("Demand Constraint")
             actions.append(
-                "Response rate נמוך מול benchmark: לבדוק bid request quality, geo/device/format targeting, "
-                "ו-QPS throttling בין SSP->DSP."
+                "Low response rate vs benchmark: check bid request quality, geo/device/format targeting, "
+                "and QPS throttling between SSP->DSP."
             )
             priority += float(lost_rev_fill) * 0.5 + 10
 
@@ -410,7 +410,7 @@ def build_recommendations(
         if pd.notna(fr) and pd.notna(b_fr) and (fr < 0.8 * b_fr) and (pd.notna(rr) and pd.notna(b_rr) and rr >= 0.9 * b_rr):
             issue_types.append("Supply/Delivery Constraint")
             actions.append(
-                "Fill נמוך למרות response סביר: לבדוק floor price, bundle/site quality, latency, "
+                "Low fill despite acceptable response rate: check floor price, bundle/site quality, latency, "
                 "win-rate post-response, ו-creative/render failures."
             )
             priority += float(lost_rev_fill) + 20
@@ -419,8 +419,8 @@ def build_recommendations(
         if pd.notna(rpm) and pd.notna(b_rpm) and (rpm < 0.8 * b_rpm) and (pd.notna(fr) and pd.notna(b_fr) and fr >= 0.9 * b_fr):
             issue_types.append("Monetization Problem")
             actions.append(
-                "RPM נמוך מול benchmark: לבחון pricing/floor segmentation, deal mix (open vs PMP), "
-                "והתאמת traffic לביקוש איכותי יותר."
+                "RPM below benchmark: review pricing/floor segmentation, deal mix (Open vs PMP), "
+                "and traffic-to-demand quality matching."
             )
             priority += float(lost_rev_rpm) + 15
 
@@ -429,7 +429,8 @@ def build_recommendations(
         if pd.notna(ivt_total) and ivt_total > max_ivt_rate:
             issue_types.append("IVT Risk")
             actions.append(
-                "IVT גבוה: להחריג ספקים/באנדלים חשודים, להקשיח pre-bid filters, ולפתוח בדיקה מול anti-fraud provider."
+                "High IVT rate: exclude suspicious suppliers/bundles, tighten pre-bid filters, "
+                "and open an investigation with the anti-fraud provider."
             )
             priority += 25
 
